@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
-import "./Home.css";
+import "./NavBar.css";
 import { ThemeContext } from "../../context/ThemeContext";
-const Home = () => {
+const NavBar = () => {
   const { theme, setTheme, words, changeTheme } = useContext(ThemeContext);
   const funcAlert = () => {
     // words = words + words;
     alert(words);
   };
   //local theme setter
-  // const changeThemeLocal = () => {
+  // const changeTheme = () => {
   //   let currentTheme = theme;
   //   currentTheme === "light" ? setTheme("dark") : setTheme("light");
   // };
   return (
     <>
-      <div className={theme}>Home</div>
+      <div className={theme}>NavBar</div>
       <button onClick={() => changeTheme()}>Change Theme</button>
       <p>{theme}</p>
       <p>{words}</p>
@@ -23,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default NavBar;
