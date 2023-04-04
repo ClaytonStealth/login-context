@@ -7,8 +7,8 @@ const Login = () => {
   //   const theme = useContext(ThemeContext);
   const dispatch = useContext(LoginDispatchContext);
   const [loginState, setLoginState] = useState({
-    username: "hello",
-    password: "World",
+    username: "",
+    password: "",
   });
   const onChangeHandler = (e) => {
     setLoginState({
@@ -35,6 +35,7 @@ const Login = () => {
             type='text'
             name='username'
             value={loginState.username}
+            placeholder='Username'
             onChange={onChangeHandler}
           />{" "}
           <br />
@@ -43,6 +44,7 @@ const Login = () => {
             type='text'
             name='password'
             value={loginState.password}
+            placeholder='Password'
             onChange={onChangeHandler}
           />
           <br />
