@@ -3,8 +3,13 @@ import { Children, createContext, useReducer } from "react";
 export const LoginContext = createContext(null);
 export const LoginDispatchContext = createContext(null);
 
+const initialState = {
+  username: "",
+  password: "",
+};
+
 export const LoginProvider = ({ children }) => {
-  const [login, dispatch] = useReducer(loginReducer, "login");
+  const [login, dispatch] = useReducer(loginReducer, initialState);
   return (
     <LoginContext.Provider value={login}>
       <LoginDispatchContext.Provider value={dispatch}>
@@ -18,11 +23,11 @@ export const LoginProvider = ({ children }) => {
 };
 
 const loginReducer = (login, action) => {
-  return action.data;
-  // switch (action.type) {
-  //     case "LOGIN":
-  //     return action.payload;
-  //     default:
-  //     return login;
-  // }
+  switch (action.type) {
+    case "LOGIN":
+      return action.data;
+    default:
+      alert("default");
+      break;
+  }
 };

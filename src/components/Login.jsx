@@ -4,11 +4,11 @@ import { ThemeContext } from "../context/ThemeContext";
 
 const Login = () => {
   const login = useContext(LoginContext);
-//   const theme = useContext(ThemeContext);
-    const dispatch = useContext(LoginDispatchContext);
+  //   const theme = useContext(ThemeContext);
+  const dispatch = useContext(LoginDispatchContext);
   const [loginState, setLoginState] = useState({
-    username: "",
-    password: "",
+    username: "hello",
+    password: "World",
   });
   const onChangeHandler = (e) => {
     setLoginState({
@@ -19,7 +19,9 @@ const Login = () => {
   return (
     <div>
       Login
-      <p>Please Login: {login}</p>
+      <p>
+        Please Login: {login.username}, {login.password}
+      </p>
       <label htmlFor='username'>UserName: </label>
       <input
         type='text'
@@ -35,6 +37,17 @@ const Login = () => {
         value={loginState.password}
         onChange={onChangeHandler}
       />
+      <br />
+      <button
+        onClick={() =>
+          dispatch({
+            type: "LOGIN",
+            data: loginState,
+          })
+        }
+      >
+        Login
+      </button>
     </div>
   );
 };
