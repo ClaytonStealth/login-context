@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import "./App.css";
 import { ThemeContext } from "./context/ThemeContext";
 import { LoginContext, LoginProvider } from "./context/LoginContext";
+import Login from "./components/Login";
 function App() {
   const [theme, setTheme] = useState("dark");
   const [login, setLogin] = useState(false);
@@ -9,8 +10,7 @@ function App() {
     <div className='App'>
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <LoginProvider>
-          <h1>Login</h1>
-          <p>Yo!</p>
+          <Login />
         </LoginProvider>
       </ThemeContext.Provider>
     </div>
