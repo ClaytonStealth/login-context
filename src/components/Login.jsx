@@ -18,36 +18,46 @@ const Login = () => {
   };
   return (
     <div>
-      Login
-      <p>
-        Please Login: {login.username}, {login.password}
-      </p>
-      <label htmlFor='username'>UserName: </label>
-      <input
-        type='text'
-        name='username'
-        value={loginState.username}
-        onChange={onChangeHandler}
-      />{" "}
-      <br />
-      <label htmlFor='password'>Password: </label>
-      <input
-        type='text'
-        name='password'
-        value={loginState.password}
-        onChange={onChangeHandler}
-      />
-      <br />
-      <button
-        onClick={() =>
-          dispatch({
-            type: "LOGIN",
-            data: loginState,
-          })
-        }
-      >
-        Login
-      </button>
+      {login.isAuth ? (
+        <button
+          onClick={() => {
+            dispatch({
+              type: "LOGOUT",
+            });
+          }}
+        >
+          Log Out
+        </button>
+      ) : (
+        <>
+          <label htmlFor='username'>UserName: </label>
+          <input
+            type='text'
+            name='username'
+            value={loginState.username}
+            onChange={onChangeHandler}
+          />{" "}
+          <br />
+          <label htmlFor='password'>Password: </label>
+          <input
+            type='text'
+            name='password'
+            value={loginState.password}
+            onChange={onChangeHandler}
+          />
+          <br />
+          <button
+            onClick={() =>
+              dispatch({
+                type: "LOGIN",
+                data: loginState,
+              })
+            }
+          >
+            Login Dispatch
+          </button>
+        </>
+      )}
     </div>
   );
 };

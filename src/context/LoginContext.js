@@ -6,6 +6,7 @@ export const LoginDispatchContext = createContext(null);
 const initialState = {
   username: "",
   password: "",
+  isAuth: false,
 };
 
 export const LoginProvider = ({ children }) => {
@@ -25,7 +26,12 @@ export const LoginProvider = ({ children }) => {
 const loginReducer = (login, action) => {
   switch (action.type) {
     case "LOGIN":
-      return action.data;
+      let isAuth = false;
+      //need to check to make sure pass and username are correct
+      action.data.username === "stealth" ? (isAuth = true) : (isAuth = false);
+      return { ...action.data, isAuth: isAuth };
+    case "LOGOUT":
+      return initialState;
     default:
       alert("default");
       break;
