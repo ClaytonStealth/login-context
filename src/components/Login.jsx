@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { LoginContext, LoginDispatchContext } from "../context/LoginContext";
 import { ThemeContext } from "../context/ThemeContext";
-import { fetchLogin } from "../context/LoginContextHelper";
+import { fetchLogin, register } from "../context/LoginContextHelper";
 
 const Login = () => {
   const login = useContext(LoginContext);
@@ -55,6 +55,10 @@ const Login = () => {
           <br />
           <button onClick={() => fetchLogin(dispatch, loginState)}>
             Login Dispatch
+          </button>
+          <br />
+          <button onClick={() => register(dispatch, loginState)}>
+            Register Dispatch
           </button>
         </>
       )}

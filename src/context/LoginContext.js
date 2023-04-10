@@ -42,6 +42,8 @@ const loginReducer = (login, action) => {
       };
     case "REGISTER":
       login.isAuth = false;
+      console.log("--------------");
+      console.log(action.data);
       return {
         ...action.data,
         isAuth: true,
