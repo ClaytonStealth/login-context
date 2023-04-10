@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { LoginContext, LoginDispatchContext } from "../context/LoginContext";
 import { ThemeContext } from "../context/ThemeContext";
+import { fetchLogin } from "../context/LoginContextHelper";
 
 const Login = () => {
   const login = useContext(LoginContext);
@@ -19,15 +20,19 @@ const Login = () => {
   return (
     <div>
       {login.isAuth ? (
-        <button
-          onClick={() => {
-            dispatch({
-              type: "LOGOUT",
-            });
-          }}
-        >
-          Log Out
-        </button>
+        <>
+          <h3>UserName: {login.username}</h3>
+          <h3>Password: {login.password}</h3>
+          <button
+            onClick={() => {
+              dispatch({
+                type: "LOGOUT",
+              });
+            }}
+          >
+            Log Out
+          </button>
+        </>
       ) : (
         <>
           <label htmlFor='username'>UserName: </label>
@@ -48,14 +53,7 @@ const Login = () => {
             onChange={onChangeHandler}
           />
           <br />
-          <button
-            onClick={() =>
-              dispatch({
-                type: "LOGIN",
-                data: loginState,
-              })
-            }
-          >
+          <button onClick={() => fetchLogin(dispatch, loginState)}>
             Login Dispatch
           </button>
         </>

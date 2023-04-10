@@ -1,5 +1,5 @@
-import { Children, createContext, useReducer } from "react";
-
+import { useContext, createContext, useReducer } from "react";
+import { fetchLogin } from "./LoginContextHelper";
 export const LoginContext = createContext(null);
 export const LoginDispatchContext = createContext(null);
 const baseURL = "http://localhost:3001/api";
@@ -26,23 +26,32 @@ export const LoginProvider = ({ children }) => {
 const loginReducer = (login, action) => {
   switch (action.type) {
     case "LOGIN":
-      let isAuth = false;
-      const fetchLogin = async () => {
-        try {
-          const success = await fetch(`${baseURL}/users/login`);
-          const data = await success.json();
-          console.log(data.message);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      fetchLogin();
-
-      //need to check to make sure pass and username are correct
+      login.isAuth = false;
       // action.data.username === "stealth" ? (isAuth = true) : (isAuth = false);
-      return { ...action.data, isAuth: isAuth };
+
+      // console.log(response.data.user);
+
+      // return {
+      //   username: action.data.username,
+      //   password: action.data.password,
+      //   isAuth: true,
+      // };
+      return {
+        ...action.data,
+        isAuth: true,
+      };
+    case "REGISTER":
+      login.isAuth = false;
+      return {
+        ...action.data,
+        isAuth: true,
+      };
     case "LOGOUT":
-      return initialState;
+      return {
+        username: "",
+        password: "",
+        isAuth: false,
+      };
     default:
       alert("default");
       break;
