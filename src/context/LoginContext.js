@@ -7,6 +7,7 @@ const initialState = {
   username: "",
   password: "",
   isAuth: false,
+  message: "Please Log In",
 };
 
 export const LoginProvider = ({ children }) => {
@@ -27,18 +28,11 @@ const loginReducer = (login, action) => {
   switch (action.type) {
     case "LOGIN":
       login.isAuth = false;
-      // action.data.username === "stealth" ? (isAuth = true) : (isAuth = false);
 
-      // console.log(response.data.user);
-
-      // return {
-      //   username: action.data.username,
-      //   password: action.data.password,
-      //   isAuth: true,
-      // };
       return {
         ...action.data,
         isAuth: true,
+        message: `Thank you for logging in ${action.data.username}`,
       };
     case "REGISTER":
       login.isAuth = false;
@@ -47,6 +41,7 @@ const loginReducer = (login, action) => {
       return {
         ...action.data,
         isAuth: true,
+        message: `Thank you for registering ${action.data.username}`,
       };
     case "LOGOUT":
       return {

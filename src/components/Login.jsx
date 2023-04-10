@@ -19,6 +19,7 @@ const Login = () => {
   };
   return (
     <div>
+      <h3>Message: {login.message}</h3>
       {login.isAuth ? (
         <>
           <h3>UserName: {login.username}</h3>
