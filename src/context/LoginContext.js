@@ -49,6 +49,13 @@ const loginReducer = (login, action) => {
         password: "",
         isAuth: false,
       };
+      case 'ERROR':
+        return {
+          username: '',
+          password: '',
+          isAuth: false,
+          message: action.data.message
+        }
     default:
       alert("default");
       break;

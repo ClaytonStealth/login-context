@@ -6,19 +6,31 @@ export const fetchLogin = async (dispatch, loginData) => {
     console.log(response.status, response.data);
     console.log(`!!!!!`);
     console.log(response.data.userObj);
-    if (response.status === 200 || response.status === 304) {
-      //   return response.data;
+
+    dispatch({
+      type: "LOGIN",
+      data: response.data.userObj,
+    });
+  } catch (e) {
+    if (e.response) {
       dispatch({
-        type: "LOGIN",
-        data: response.data.userObj,
+        type: "ERROR",
+        data: {
+          message: e.response.data.message,
+        },
       });
     } else {
-      throw new Error(response.status);
+      dispatch({
+        type: "ERROR",
+        data: {
+          message: "No Response From Server",
+        },
+      });
     }
-  } catch (e) {
-    console.log(e);
   }
 };
+////////////////////////////////////////////////////////////////////////////////
+
 
 export const register = async (dispatch, newData) => {
   try {
@@ -27,18 +39,26 @@ export const register = async (dispatch, newData) => {
     console.log(response.status, response.data);
     console.log(`!!!!!`);
     console.log(response.data.userObj);
-    if (response.status === 200 || response.status === 304) {
-      //   return response.data;
+
+    dispatch({
+      type: "REGISTER",
+      data: response.data.userObj,
+    });
+  } catch (e) {
+    if (e.response) {
       dispatch({
-        type: "REGISTER",
-        data: response.data.userObj,
+        type: "ERROR",
+        data: {
+          message: e.response.data.message,
+        },
       });
     } else {
-      throw new Error(response.status);
+      dispatch({
+        type: "ERROR",
+        data: {
+          message: "No Response From Server",
+        },
+      });
     }
-  } catch (e) {
-    console.log("-------");
-    console.log(e.response.status);
-    console.log(e.response.data.message);
   }
 };
