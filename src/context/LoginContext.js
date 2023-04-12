@@ -2,8 +2,8 @@ import { useContext, createContext, useReducer } from "react";
 import { fetchLogin } from "./LoginContextHelper";
 export const LoginContext = createContext(null);
 export const LoginDispatchContext = createContext(null);
-const baseURL = "http://localhost:3001/api";
 const initialState = {
+  firstname: "",
   username: "",
   password: "",
   isAuth: false,
@@ -16,7 +16,7 @@ export const LoginProvider = ({ children }) => {
     <LoginContext.Provider value={login}>
       <LoginDispatchContext.Provider value={dispatch}>
         <div>
-          Hello
+          
           {children}
         </div>
       </LoginDispatchContext.Provider>
@@ -49,13 +49,19 @@ const loginReducer = (login, action) => {
         password: "",
         isAuth: false,
       };
-      case 'ERROR':
-        return {
-          username: '',
-          password: '',
-          isAuth: false,
-          message: action.data.message
-        }
+    case "ERROR":
+      return {
+        username: "",
+        password: "",
+        isAuth: false,
+        message: action.data.message,
+      };
+    case "DELETE":
+      return {
+        ...login,
+        isAuth: false,
+        message: action.data.message,
+      };
     default:
       alert("default");
       break;

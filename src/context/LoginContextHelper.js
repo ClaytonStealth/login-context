@@ -3,7 +3,6 @@ export const fetchLogin = async (dispatch, loginData) => {
   try {
     const response = await Axios.post(`/users/login`, loginData);
     // const success = await response.json(); //fetch problems + solution
-    console.log(response.status, response.data);
     console.log(`!!!!!`);
     console.log(response.data.userObj);
 
@@ -30,7 +29,6 @@ export const fetchLogin = async (dispatch, loginData) => {
   }
 };
 ////////////////////////////////////////////////////////////////////////////////
-
 
 export const register = async (dispatch, newData) => {
   try {
@@ -60,5 +58,21 @@ export const register = async (dispatch, newData) => {
         },
       });
     }
+  }
+};
+/////////////////////////////////////////////////////////////////////////
+export const deleteUser = async (dispatch, username) => {
+  try {
+    const response = await Axios.post(`/users/delete-user`, {
+      username: username,
+    });
+    dispatch({
+      type: "DELETE",
+      data: {
+        message: response.data.message,
+      },
+    });
+  } catch (e) {
+    console.log(e);
   }
 };

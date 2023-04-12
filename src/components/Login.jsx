@@ -1,7 +1,11 @@
 import React, { useState, useContext } from "react";
 import { LoginContext, LoginDispatchContext } from "../context/LoginContext";
 import { ThemeContext } from "../context/ThemeContext";
-import { fetchLogin, register } from "../context/LoginContextHelper";
+import {
+  deleteUser,
+  fetchLogin,
+  register,
+} from "../context/LoginContextHelper";
 
 const Login = () => {
   const login = useContext(LoginContext);
@@ -19,6 +23,8 @@ const Login = () => {
   };
   return (
     <div>
+      {" "}
+      Login
       <h3>Message: {login.message}</h3>
       {login.isAuth ? (
         <>
@@ -32,6 +38,9 @@ const Login = () => {
             }}
           >
             Log Out
+          </button>
+          <button onClick={() => deleteUser(dispatch, login.username)}>
+            Delete!
           </button>
         </>
       ) : (
@@ -47,7 +56,7 @@ const Login = () => {
           <br />
           <label htmlFor='password'>Password: </label>
           <input
-            type='text'
+            type='password'
             name='password'
             value={loginState.password}
             placeholder='Password'
