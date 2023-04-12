@@ -5,10 +5,13 @@ export const fetchLogin = async (dispatch, loginData) => {
     // const success = await response.json(); //fetch problems + solution
     console.log(`!!!!!`);
     console.log(response.data.userObj);
-
+    localStorage.setItem("jwtToken", response.data.token);
     dispatch({
       type: "LOGIN",
-      data: response.data.userObj,
+      data: {
+        userObj: response.data.userObj,
+        token: response.data.token,
+      },
     });
   } catch (e) {
     if (e.response) {
@@ -71,6 +74,17 @@ export const deleteUser = async (dispatch, username) => {
       data: {
         message: response.data.message,
       },
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const logout = async (dispatch) => {
+  try {
+    localStorage.removeItem("jwtToken");
+    dispatch({
+      type: "LOGOUT",
     });
   } catch (e) {
     console.log(e);

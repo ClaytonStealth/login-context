@@ -4,6 +4,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import {
   deleteUser,
   fetchLogin,
+  logout,
   register,
 } from "../context/LoginContextHelper";
 
@@ -21,6 +22,8 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+
   return (
     <div>
       {" "}
@@ -32,9 +35,7 @@ const Login = () => {
           <h3>Password: {login.password}</h3>
           <button
             onClick={() => {
-              dispatch({
-                type: "LOGOUT",
-              });
+              logout(dispatch);
             }}
           >
             Log Out

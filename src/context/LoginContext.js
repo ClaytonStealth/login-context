@@ -1,5 +1,4 @@
-import { useContext, createContext, useReducer } from "react";
-import { fetchLogin } from "./LoginContextHelper";
+import { createContext, useReducer } from "react";
 export const LoginContext = createContext(null);
 export const LoginDispatchContext = createContext(null);
 const initialState = {
@@ -15,10 +14,7 @@ export const LoginProvider = ({ children }) => {
   return (
     <LoginContext.Provider value={login}>
       <LoginDispatchContext.Provider value={dispatch}>
-        <div>
-          
-          {children}
-        </div>
+        <div>{children}</div>
       </LoginDispatchContext.Provider>
     </LoginContext.Provider>
   );
@@ -30,9 +26,10 @@ const loginReducer = (login, action) => {
       login.isAuth = false;
 
       return {
-        ...action.data,
+        ...action.data.userObj,
         isAuth: true,
-        message: `Thank you for logging in ${action.data.username}`,
+        message: `Thank you for logging in ${action.data.userObj.username}`,
+        token: action.data.token,
       };
     case "REGISTER":
       login.isAuth = false;
