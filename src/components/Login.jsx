@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { LoginContext, LoginDispatchContext } from "../context/LoginContext";
-import { ThemeContext } from "../context/ThemeContext";
 import {
   deleteUser,
   fetchLogin,
@@ -8,10 +7,11 @@ import {
   register,
 } from "../context/LoginContextHelper";
 import { checkAuthToken } from "../lib/checkAuthToken";
+import { AuthContext, AuthDispatchContext } from "../context/AuthContext";
 
 const Login = () => {
-  checkAuthToken();
-
+  const auth = useContext(AuthContext);
+  const authDispatch = useContext(AuthDispatchContext);
   const login = useContext(LoginContext);
   //   const theme = useContext(ThemeContext);
   const dispatch = useContext(LoginDispatchContext);
@@ -31,18 +31,20 @@ const Login = () => {
       {" "}
       Login
       <h3>Message: {login.message}</h3>
-      {login.isAuth ? (
+      {auth.isAuth ? (
         <>
           <h3>UserName: {login.username}</h3>
           <h3>Password: {login.password}</h3>
           <button
             onClick={() => {
-              logout(dispatch);
+              logout(dispatch, authDispatch);
             }}
           >
             Log Out
           </button>
-          <button onClick={() => deleteUser(dispatch, login.username)}>
+          <button
+            onClick={() => deleteUser(dispatch, login.username, authDispatch)}
+          >
             Delete!
           </button>
         </>
@@ -66,11 +68,13 @@ const Login = () => {
             onChange={onChangeHandler}
           />
           <br />
-          <button onClick={() => fetchLogin(dispatch, loginState)}>
+          <button
+            onClick={() => fetchLogin(dispatch, loginState, authDispatch)}
+          >
             Login Dispatch
           </button>
           <br />
-          <button onClick={() => register(dispatch, loginState)}>
+          <button onClick={() => register(dispatch, loginState, authDispatch)}>
             Register Dispatch
           </button>
         </>

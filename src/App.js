@@ -14,11 +14,11 @@ function App() {
 
   return (
     <div className='App'>
-      <AuthProvider>
-        <LoginProvider>
-          <Login />
-        </LoginProvider>
-      </AuthProvider>
+      {/* <AuthProvider> */}
+      <LoginProvider>
+        <Login />
+      </LoginProvider>
+      {/* </AuthProvider> */}
     </div>
   );
 }
