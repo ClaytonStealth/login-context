@@ -69,6 +69,7 @@ export const deleteUser = async (dispatch, username) => {
     const response = await Axios.post(`/users/delete-user`, {
       username: username,
     });
+    localStorage.removeItem("jwtToken"); //remove the token from local storage
     dispatch({
       type: "DELETE",
       data: {
