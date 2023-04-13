@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Login from "./components/Login";
 import { checkAuthToken } from "./lib/checkAuthToken";
 checkAuthToken();
+
 function App() {
   const [theme, setTheme] = useState("dark");
   const [login, setLogin] = useState(false);

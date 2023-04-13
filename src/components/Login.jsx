@@ -7,8 +7,11 @@ import {
   logout,
   register,
 } from "../context/LoginContextHelper";
+import { checkAuthToken } from "../lib/checkAuthToken";
 
 const Login = () => {
+  checkAuthToken();
+
   const login = useContext(LoginContext);
   //   const theme = useContext(ThemeContext);
   const dispatch = useContext(LoginDispatchContext);
@@ -22,7 +25,6 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
 
   return (
     <div>
